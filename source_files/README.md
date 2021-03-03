@@ -25,10 +25,7 @@ In the cell below, import the appropriate library and connect to the mongoDB ser
 
 
 ```python
-import pymongo
 
-myclient = pymongo.MongoClient('mongodb://localhost:27017')
-mydb = myclient['lab_db']
 ```
 
 ## Creating a Collection
@@ -37,7 +34,7 @@ Now, create a collection called `'lab_collection'` inside `'lab_db'`.
 
 
 ```python
-mycollection = mydb['lab_collection']
+mycollection = None
 ```
 
 ## Adding Some Data
@@ -60,34 +57,23 @@ Create the documents from the table listed above, and then use `insert_many()` t
 
 
 ```python
-customer_1 = {'Name': 'John Smith', 'Email': 'j.smith@thesmiths.com', 'Mailing_Address': '123 mulberry lane', 'Balance': 0.0, 'Notes': 'Called technical support, issue not yet resolved.'}
-customer_2 = {'Name': 'Jane Smith', 'Email': 'jane_smith@thesmiths.com', 'Balance': 25.0}
-customer_3 = {'Name': 'Adam Enbar', 'Email': 'adam@theflatironschool.com', 'Mailing_Address': '11 Broadway', 'Balance': 14.99, 'Notes': 'Set up on recurring billing cycle.'}
-customer_4 = {'Name': 'Avi Flombaum', 'Email': 'avi@theflatironschool.com', 'Mailing_Address': '11 Broadway', 'Balance': 0.0}
-customer_5 = {'Name': 'Steven S.', 'Email': 'steven.s@gmail.net', 'Balance': -20.23, 'Notes': 'Refunded for overpayment due to price match guarantee.'}
+customer_1 = None
+customer_2 = None
+customer_3 = None
+customer_4 = None
+customer_5 = None
 
-all_records = [customer_1, customer_2, customer_3, customer_4, customer_5]
+all_records = None
 
-insertion_results = mycollection.insert_many(all_records)
+insertion_results = None
 ```
 
 Now, access the appropriate attribute from the results object returned from the insertion to see the unique IDs for each record inserted, so that we can confirm each were inserted correctly. 
 
 
 ```python
-insertion_results.inserted_ids
+
 ```
-
-
-
-
-    [ObjectId('5cab91e1f1210d35c8dbfd5f'),
-     ObjectId('5cab91e1f1210d35c8dbfd60'),
-     ObjectId('5cab91e1f1210d35c8dbfd61'),
-     ObjectId('5cab91e1f1210d35c8dbfd62'),
-     ObjectId('5cab91e1f1210d35c8dbfd63')]
-
-
 
 ## Querying and Filtering
 
@@ -95,17 +81,9 @@ In the cell below, return the name and email address for every customer record. 
 
 
 ```python
-query_1 = mycollection.find({}, {'Name': 1, 'Email': 1})
-for item in query_1:
-    print(item)
+query_1 = None
+
 ```
-
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd5f'), 'Name': 'John Smith', 'Email': 'j.smith@thesmiths.com'}
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd60'), 'Name': 'Jane Smith', 'Email': 'jane_smith@thesmiths.com'}
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd61'), 'Name': 'Adam Enbar', 'Email': 'adam@theflatironschool.com'}
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd62'), 'Name': 'Avi Flombaum', 'Email': 'avi@theflatironschool.com'}
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd63'), 'Name': 'Steven S.', 'Email': 'steven.s@gmail.net'}
-
 
 Great! Now, let's write a query that gets an individual record based on a stored key-value pair a document contains. 
 
@@ -113,13 +91,9 @@ In the cell below, write a query to get the record for `'John Smith'` by using h
 
 
 ```python
-query_2 = mycollection.find({'Name': 'John Smith'})
-for item in query_2:
-    print(item)
+query_2 = None
+
 ```
-
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd5f'), 'Name': 'John Smith', 'Email': 'j.smith@thesmiths.com', 'Mailing_Address': '123 mulberry lane', 'Balance': 0.0, 'Notes': 'Called technical support, issue not yet resolved.'}
-
 
 Great! Now, write a query to get the names, email addresses, and balances for customers that have a balance greater than 0. Use a modifier to do this. 
 
@@ -127,14 +101,9 @@ Great! Now, write a query to get the names, email addresses, and balances for cu
 
 
 ```python
-query_3 = mycollection.find({'Balance': {'$gt': 0}}, {'Name': 1, 'Email': 1, 'Balance': 1},)
-for item in query_3:
-    print(item)
+query_3 = None
+
 ```
-
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd60'), 'Name': 'Jane Smith', 'Email': 'jane_smith@thesmiths.com', 'Balance': 25.0}
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd61'), 'Name': 'Adam Enbar', 'Email': 'adam@theflatironschool.com', 'Balance': 14.99}
-
 
 ## Updating a Record
 
@@ -142,29 +111,18 @@ Now, let's update some records. In the cell below. set the mailing address for `
 
 
 ```python
-record_to_update_1 = {'Name': 'John Smith'}
-update_1 = {'$set': {'Mailing_Address': '367 55th St., apt 2A'}}
-mycollection.update_one(record_to_update_1, update_1)
+record_to_update_1 = None
+update_1 = None
+
 ```
-
-
-
-
-    <pymongo.results.UpdateResult at 0x15c44ddd248>
-
-
 
 Now, write a query to check that the update worked for this document in the cell below:  
 
 
 ```python
-query_4 = mycollection.find({'Name': 'John Smith'})
-for item in query_4:
-    print(item)
+query_4 = None
+
 ```
-
-    {'_id': ObjectId('5cab91e1f1210d35c8dbfd5f'), 'Name': 'John Smith', 'Email': 'j.smith@thesmiths.com', 'Mailing_Address': '367 55th St., apt 2A', 'Balance': 0.0, 'Notes': 'Called technical support, issue not yet resolved.'}
-
 
 Now, let's assume that we want to add birthdays for each customer record. Consider the following table:
 
@@ -188,17 +146,11 @@ In the cell below:
 
 
 ```python
-names_list = ['John Smith', 'Jane Smith', 'Adam Enbar', 'Avi Flombaum', 'Steven S.']
-birthdays_list = ['02/20/1986', '07/07/1983', '12/02/0982', '04/17/1983', '08/30/1991']
+names_list = None
+birthdays_list = None
 
 def update_birthdays(names, birthdays):
-    for ind, name in enumerate(names):
-        birthday = birthdays_list[ind]
-        query = {'Name': name}
-        update = {'$set': {'Birthday': birthday}}
-        mycollection.update_one(query, update)
-        # Alternative method is to create a dictionary for each person, store them all in a list, and then pass that 
-        # list to update_many() at the end of the function. 
+    pass
         
 update_birthdays(names_list, birthdays_list)
 ```
@@ -207,45 +159,8 @@ Now, write a query to check your work and see that the birthdays were added corr
 
 
 ```python
-[i for i in mycollection.find()]
+
 ```
-
-
-
-
-    [{'_id': ObjectId('5cab91e1f1210d35c8dbfd5f'),
-      'Name': 'John Smith',
-      'Email': 'j.smith@thesmiths.com',
-      'Mailing_Address': '367 55th St., apt 2A',
-      'Balance': 0.0,
-      'Notes': 'Called technical support, issue not yet resolved.',
-      'Birthday': '02/20/1986'},
-     {'_id': ObjectId('5cab91e1f1210d35c8dbfd60'),
-      'Name': 'Jane Smith',
-      'Email': 'jane_smith@thesmiths.com',
-      'Balance': 25.0,
-      'Birthday': '07/07/1983'},
-     {'_id': ObjectId('5cab91e1f1210d35c8dbfd61'),
-      'Name': 'Adam Enbar',
-      'Email': 'adam@theflatironschool.com',
-      'Mailing_Address': '11 Broadway',
-      'Balance': 14.99,
-      'Notes': 'Set up on recurring billing cycle.',
-      'Birthday': '12/02/0982'},
-     {'_id': ObjectId('5cab91e1f1210d35c8dbfd62'),
-      'Name': 'Avi Flombaum',
-      'Email': 'avi@theflatironschool.com',
-      'Mailing_Address': '11 Broadway',
-      'Balance': 0.0,
-      'Birthday': '04/17/1983'},
-     {'_id': ObjectId('5cab91e1f1210d35c8dbfd63'),
-      'Name': 'Steven S.',
-      'Email': 'steven.s@gmail.net',
-      'Balance': -20.23,
-      'Notes': 'Refunded for overpayment due to price match guarantee.',
-      'Birthday': '08/30/1991'}]
-
-
 
 Great! It looks like the birthdays have been successfully added to every record correctly!
 
